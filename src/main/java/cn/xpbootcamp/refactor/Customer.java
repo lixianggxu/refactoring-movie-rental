@@ -27,14 +27,14 @@ public class Customer {
         StringBuilder result = new StringBuilder("Rental Record for " + getName() + "：\n");
         while (rentals.hasMoreElements()) {
             Rental each = rentals.nextElement();
+            Movie movie = each.getMovie();
+            int retalDay = each.getDaysRented();
             //show figures for this rental
             //determine amounts for each line
             double thisAmount = 0d;
-            thisAmount = each.getRentalMenoyforOneMovie(each.getMovie(),each.getDaysRented());
+            thisAmount = each.getRentalMenoyforOneMovie(movie,retalDay);
             //add frequent renter points
-            frequentRenterPoints++;
-            if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) && each.getDaysRented() > 1)
-                frequentRenterPoints++;
+            frequentRenterPoints += each.getFrequentRenterPointsforOneMovie(movie,retalDay);
 
             //show figures for this rental
             result.append("\t")
