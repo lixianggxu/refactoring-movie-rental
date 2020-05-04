@@ -18,4 +18,23 @@ public class Rental {
         return daysRented;
     }
 
+    double getRentalMenoyforOneMovie(Movie movie, int daysRented){
+        double rentalMenoy = 0d;
+        switch (movie.getPriceCode()) {
+            case Movie.HISTORY:
+                rentalMenoy = 2;
+                if (daysRented > 2)
+                    rentalMenoy += (daysRented - 2) * 1.5;
+                break;
+            case Movie.NEW_RELEASE:
+                rentalMenoy = daysRented* 3;
+                break;
+            case Movie.CAMPUS:
+                rentalMenoy = 1.5;
+                if (daysRented > 3)
+                    rentalMenoy += (daysRented - 3) * 1.5;
+                break;
+        }
+        return rentalMenoy;
+    }
 }
