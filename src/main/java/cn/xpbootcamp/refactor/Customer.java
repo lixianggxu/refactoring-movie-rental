@@ -1,19 +1,18 @@
 package cn.xpbootcamp.refactor;
 
-import java.util.Enumeration;
-import java.util.Vector;
+import  java.util.ArrayList;
 
 public class Customer {
 
     private String name;
-    private Vector<Rental> rentals = new Vector<>();
+    private ArrayList<Rental> rentals = new ArrayList<Rental>();
 
     Customer(String name) {
         this.name = name;
     }
 
     void addRental(Rental rental) {
-        rentals.addElement(rental);
+        rentals.add(rental);
     }
 
     public String getName() {
@@ -23,10 +22,9 @@ public class Customer {
     String statement() {
         double totalAmount = 0d;
         int frequentRenterPoints = 0;
-        Enumeration<Rental> rentals = this.rentals.elements();
+        ArrayList<Rental> rentalsList = this.rentals;
         StringBuilder result = new StringBuilder("Rental Record for " + getName() + "：\n");
-        while (rentals.hasMoreElements()) {
-            Rental each = rentals.nextElement();
+        for(Rental each : rentalsList){
             Movie movie = each.getMovie();
             int retalDay = each.getDaysRented();
             //show figures for this rental
@@ -38,9 +36,9 @@ public class Customer {
 
             //show figures for this rental
             result.append("\t")
-                  .append(each.getMovie().getTitle())
-                  .append("\t")
-                  .append(thisAmount).append("\n");
+                    .append(each.getMovie().getTitle())
+                    .append("\t")
+                    .append(thisAmount).append("\n");
             totalAmount += thisAmount;
         }
         //add footer lines
