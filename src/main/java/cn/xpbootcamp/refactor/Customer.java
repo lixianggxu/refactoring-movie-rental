@@ -24,19 +24,19 @@ public class Customer {
         int frequentRenterPoints = 0;
         ArrayList<Rental> rentalsList = this.rentals;
         StringBuilder result = new StringBuilder("Rental Record for " + getName() + "：\n");
-        for(Rental each : rentalsList){
-            Movie movie = each.getMovie();
-            int retalDay = each.getDaysRented();
+        for(Rental rental : rentalsList){
+            Movie movie = rental.getMovie();
+            int retalDay = rental.getDaysRented();
             //show figures for this rental
-            //determine amounts for each line
+            //determine amounts for rental line
             double thisAmount = 0d;
-            thisAmount = each.getRentalMenoyforOneMovie(movie,retalDay);
+            thisAmount = rental.getRentalMenoyforOneMovie(movie,retalDay);
             //add frequent renter points
-            frequentRenterPoints += each.getFrequentRenterPointsforOneMovie(movie,retalDay);
+            frequentRenterPoints += rental.getFrequentRenterPointsforOneMovie(movie,retalDay);
 
             //show figures for this rental
             result.append("\t")
-                    .append(each.getMovie().getTitle())
+                    .append(rental.getMovie().getTitle())
                     .append("\t")
                     .append(thisAmount).append("\n");
             totalAmount += thisAmount;
